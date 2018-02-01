@@ -8,7 +8,7 @@
     <input type="file" ng-model="myFile" class="form-control" accept="image/*"  onchange="angular.element(this).scope().uploadedFile(this)">
     <button ng-click = "uploadFile()">upload me</button>
     <br/>
-    <img ng-src="{{src}}">
+    <img ng-src="{{src}}" width="300">
  <script type="text/javascript">
         var app =  angular.module('myApp',[]);
         // Here we write a custom service for upload file to reuse it in the controller
