@@ -1,25 +1,4 @@
 var app = angular.module('myApp', ['ngAria','ngMaterial']);
-// Here we write a custom service for upload file to reuse it in the controller
-app.service('uploadFile', ['$http', function($http) {
-  this.uploadFiletoServer = function(file, uploadUrl) {
-    var fd = new FormData();
-    fd.append('file', file);
-    $http.post(uploadUrl, fd, {
-        transformRequest: angular.identity,
-        headers: {
-          'Content-Type': undefined,
-          'Process-Data': false
-        }
-      })
-      .success(function(data) {
-        alert(data);
-      })
-      .error(function() {
-        alert("Error");
-      });
-  }
-}]);
-
 app.controller('ImageController', ['$scope', 'uploadFile', function($scope, uploadFile) {
   $scope.uploadFile = function() {
     $scope.myFile = $scope.files[0];
