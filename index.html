@@ -3,55 +3,45 @@
 
 <head>
   <title>AngularJS PHP- upload and display image using FileReader with example</title>
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
 </head>
 
 <body ng-app="myApp" ng-controller="ImageController">
   <input type="file" ng-model="myFile" class="form-control" accept="image/*" onchange="angular.element(this).scope().uploadedFile(this)">
   <button ng-click="uploadFile()">upload me</button>
   <br/>
-  <img ng-src="{{src}}" width="300" style="border: 1px solid #eee">
-  <script type="text/javascript">
-    var app = angular.module('myApp', []);
-    // Here we write a custom service for upload file to reuse it in the controller
-    app.service('uploadFile', ['$http', function($http) {
-      this.uploadFiletoServer = function(file, uploadUrl) {
-        var fd = new FormData();
-        fd.append('file', file);
-        $http.post(uploadUrl, fd, {
-            transformRequest: angular.identity,
-            headers: {
-              'Content-Type': undefined,
-              'Process-Data': false
-            }
-          })
-          .success(function(data) {
-            alert(data);
-          })
-          .error(function() {
-            alert("Error");
-          });
-      }
-    }]);
-    app.controller('ImageController', ['$scope', 'uploadFile', function($scope, uploadFile) {
-      $scope.uploadFile = function() {
-        $scope.myFile = $scope.files[0];
-        var file = $scope.myFile;
-        var url = "upload.php";
-        uploadFile.uploadFiletoServer(file, url);
-      };
-      $scope.uploadedFile = function(element) {
-        var reader = new FileReader();
-        reader.onload = function(event) {
-          $scope.$apply(function($scope) {
-            $scope.files = element.files;
-            $scope.src = event.target.result
-          });
-        }
-        reader.readAsDataURL(element.files[0]);
-      }
-    }]);
-  </script>
+  <choose-file layout="row" flex="20">
+    <input id="fileInput" ng-model="myFile" type="file" class="ng-hide" accept="image/*" onchange="angular.element(this).scope().uploadedFile(this)"/>
+    <md-input-container flex class="md-block">
+      <input type="text" ng-model="fileName" disabled>
+      <div class="hint">Select your file</div>
+    </md-input-container>
+    <div>
+      <md-button id="uploadButton" class="md-fab md-mini">
+        <md-icon class="material-icons">attach_file</md-icon>
+      </md-button>
+    </div>
+  </choose-file>
+  <div class="">
+    <md-button class="md-raised md-primary" ng-click="uploadFile()">Enviar</md-button>
+  </div>
+  <br/>
+  <img ng-src="{{src}}" width="300">
+
+
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
+   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
+   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
+
+   <!-- Angular Material Library -->
+   <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
+
+  <script src="app.js" charset="utf-8"></script>
+  <script src="input-file/input-file-directive.js" charset="utf-8"></script>
+  <script src="service-upload/upload-image-service.js" charset="utf-8"></script>
 </body>
 
 </html>
