@@ -9,8 +9,8 @@
 </head>
 
 <body ng-app="myApp" ng-controller="ImageController">
-  <input type="file" ng-model="myFile" class="form-control" accept="image/*" onchange="angular.element(this).scope().uploadedFile(this)">
-  <button ng-click="uploadFile()">upload me</button>
+  <!-- <input type="file" ng-model="myFile" class="form-control" accept="image/*" onchange="angular.element(this).scope().uploadedFile(this)">
+  <button ng-click="uploadFile()">upload me</button> -->
   <br/>
   <choose-file layout="row" flex="20">
     <input id="fileInput" ng-model="myFile" type="file" class="ng-hide" accept="image/*" onchange="angular.element(this).scope().uploadedFile(this)"/>
